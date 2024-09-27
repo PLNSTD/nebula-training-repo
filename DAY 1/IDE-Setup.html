@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Mastering Python Scripts and Notebooks in Visual Studio Code</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="mastering-python-scripts-and-notebooks-in-visual-studio-code">Mastering Python Scripts and Notebooks in Visual Studio Code</h1>
+<hr>
+<p><strong>Introduction</strong>
+Welcome to our comprehensive workshop on Python development in Visual Studio Code (VS Code). Today, we will delve into the capabilities of Python notebooks and scripts within this versatile editor. Whether you're new to Python or looking to enhance your skills, this session is designed to boost your productivity and effectiveness in coding.</p>
+<hr>
+<p><strong>What You'll Learn</strong></p>
+<ol>
+<li><strong>Setting Up and Managing Python Notebooks in VS Code</strong></li>
+<li><strong>Running and Optimizing Python Scripts</strong></li>
+<li><strong>Simple Customizations for a Better Coding Experience</strong></li>
+<li><strong>Collaboration in Python Notebooks using Live Share</strong></li>
+<li><strong>General Q&amp;A and Troubleshooting Tips</strong></li>
+</ol>
+<hr>
+<p><strong>Recommended VS Code Extensions for Python</strong>
+Here are some of the most popular and useful extensions for Python development in VS Code:</p>
+<ol>
+<li>
+<p><strong>Python (by Microsoft)</strong>: This is a crucial extension for Python development in VS Code. It provides features like IntelliSense, linting, debugging, code navigation, code formatting, Jupyter Notebook support, refactoring, variable explorer, test explorer, and more.</p>
+</li>
+<li>
+<p><strong>Jupyter</strong>: Essential for working with Jupyter notebooks within VS Code. It allows you to create, edit, and run notebook files directly.</p>
+</li>
+<li>
+<p><strong>Pylance</strong>: Offers fast, feature-rich language support for Python. It enhances Python language support in VS Code by providing type information, auto-imports, type-checking, and more.</p>
+</li>
+</ol>
+<p>Installing these extensions is simple. Open the Extensions tab in VS Code and search for the extension name. Then, click &quot;Install&quot; to add the extension to your VS Code environment.</p>
+<hr>
+<p><strong>Python Notebooks in VS Code</strong>
+Python notebooks, or <code>.ipynb</code> files, offer a unique interactive platform for combining executable Python code with rich text and visuals. They are instrumental in data analysis, scientific research, and educational purposes.</p>
+<hr>
+<p><strong>Getting Started with Python Notebooks</strong></p>
+<ul>
+<li><strong>Creating a New Notebook</strong>: Learn how to start a new <code>.ipynb</code> file using the command palette (<code>Ctrl+Shift+P</code> or <code>Cmd+Shift+P</code> on Mac) or directly within VS Code.</li>
+<li><strong>Interactive Coding Experience</strong>: We'll explore how to seamlessly blend code and Markdown text cells for an engaging and dynamic coding experience.
+<ul>
+<li>Here are some of the key concepts to cover:
+<ul>
+<li><strong>Cell Types</strong>: We'll cover the different types of cells and how to convert between them.
+<ul>
+<li><strong>Code Cells</strong>: These are cells that contain executable Python code. They can be run individually or all at once.</li>
+<li><strong>Markdown Cells</strong>: These are cells that contain rich text and visuals. They can be used to provide context and explanations for code cells.</li>
+<li><strong>Output Cells</strong>: These are cells that display the output of code cells. They can be used to visualize data and results.</li>
+</ul>
+</li>
+<li><strong>Cell Execution</strong>: We'll cover how to execute cells individually or all at once.</li>
+<li><strong>Cell Editing</strong>: We'll cover how to edit cells and add new cells.</li>
+<li><strong>Cell Deletion</strong>: We'll cover how to delete cells.</li>
+<li><strong>Cell Movement</strong>: We'll cover how to move cells up and down.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Managing Dependencies</strong>: Understand how to effectively manage Python and Jupyter installations with the Python extension in VS Code, ensuring your environment is always ready for your projects.
+<ul>
+<li>Key concepts for managing dependencies in a notebook include:
+<ul>
+<li><strong>Python Interpreter Selection</strong>: We'll cover how to select the Python interpreter for your notebook.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p><strong>Python Scripts in VS Code</strong>
+Python scripts, or <code>.py</code> files, are the backbone of application development and automation. They're crucial for building robust and scalable projects.</p>
+<hr>
+<p><strong>Running and Managing Python Scripts</strong></p>
+<ul>
+<li><strong>Script Basics</strong>: We'll cover how to open, create, and execute scripts in VS Code, providing a foundation for script-based development.</li>
+<li><strong>Efficient Script Execution</strong>: Discover tools such as code linting, debugging, and the use of virtual environments to manage your projects effectively.</li>
+<li><strong>Integrated Terminal Usage</strong>: Learn how to leverage the integrated terminal in VS Code to run your scripts (<code>python filename.py</code>), streamlining your workflow.</li>
+</ul>
+<hr>
+<p><strong>Python Projects and Virtual Environments</strong></p>
+<ul>
+<li>
+<p>Tools to discuss:</p>
+<ul>
+<li>Pip</li>
+<li>Virtual Environments (venv)</li>
+<li>Conda</li>
+<li>Poetry</li>
+</ul>
+</li>
+<li>
+<p><strong>Pip</strong> is a package manager for Python. It allows you to install, uninstall, and update packages from the Python Package Index (PyPI).
+- <strong>Pip Concepts</strong>:</p>
+<ul>
+<li><strong>Installing Packages</strong>: We'll cover how to install packages using <code>pip</code> in the terminal.</li>
+<li><strong>Bulk Installation</strong>: We'll cover how to install multiple packages at once using <code>pip</code> in the terminal along with a <code>requirements.txt</code> file.</li>
+<li><strong>Uninstalling Packages</strong>: We'll cover how to uninstall packages using <code>pip</code> in the terminal.</li>
+<li><strong>Updating Packages</strong>: We'll cover how to update packages using <code>pip</code> in the terminal.</li>
+</ul>
+</li>
+<li>
+<p><strong>Conda</strong> is a Python package and environment manager. It allows you to create new environments, install packages, and manage dependencies.
+- <strong>Conda Concepts</strong>:</p>
+<ul>
+<li><strong>Creating New Environments</strong>: We'll cover how to create new environments using <code>conda</code> in the terminal.</li>
+<li><strong>Activating Environments</strong>: We'll cover how to activate environments using <code>conda</code> in the terminal.</li>
+<li><strong>Deactivating Environments</strong>: We'll cover how to deactivate environments using <code>conda</code> in the terminal.</li>
+<li><strong>Deleting Environments</strong>: We'll cover how to delete environments using <code>conda</code> in the terminal.</li>
+<li><strong>Installing Packages</strong>: We'll cover how to install packages using <code>conda</code> in the terminal.</li>
+<li><strong>Bulk Installation</strong>: We'll cover how to install multiple packages at once using <code>conda</code> in the terminal along with a <code>requirements.txt</code> file.</li>
+<li><strong>Uninstalling Packages</strong>: We'll cover how to uninstall packages using <code>conda</code> in the terminal.</li>
+<li><strong>Updating Packages</strong>: We'll cover how to update packages using <code>conda</code> in the terminal.</li>
+</ul>
+</li>
+<li>
+<p><strong>Virtual Environments (venv)</strong> are isolated Python environments (Meaning has it's own python interpreter and package library) that allow you to install packages and manage dependencies for individual projects. They are useful for ensuring that your projects have the correct dependencies and versions.
+- <strong>Virtual Environment Concepts</strong>:</p>
+<ul>
+<li><strong>Creating New Virtual Environments</strong>: We'll cover how to create new virtual environments using <code>venv</code> in the terminal.</li>
+<li><strong>Activating Virtual Environments</strong>: We'll cover how to activate virtual environments using <code>venv</code> in the terminal.</li>
+<li><strong>Deactivating Virtual Environments</strong>: We'll cover how to deactivate virtual environments using <code>venv</code> in the terminal.</li>
+<li><strong>Deleting Virtual Environments</strong>: We'll cover how to delete virtual environments using <code>venv</code> in the terminal.</li>
+</ul>
+</li>
+<li>
+<p><strong>Poetry</strong> is a Python dependency management and packaging tool. It allows you to create new projects, add dependencies, and install, uninstall, and update dependencies. It can essentially replace <code>pip</code> and <code>venv</code> or <code>conda</code> for dependency management.</p>
+<ul>
+<li><strong>Creating New Project</strong>: We'll cover how to create a new project using Poetry.</li>
+<li><strong>Adding Dependencies</strong>: We'll cover how to add individual dependencies to your project using Poetry.</li>
+<li><strong>Bulk Installation</strong>: We'll cover how to install all dependencies in your project using Poetry.</li>
+<li><strong>Uninstalling Dependencies</strong>: We'll cover how to uninstall dependencies from your project using Poetry.</li>
+<li><strong>Updating Dependencies</strong>: We'll cover how to update dependencies in your project using Poetry.</li>
+<li><strong>Advantages of using Poetry</strong>: We'll cover the advantages of using Poetry over <code>pip</code> and <code>venv</code> or <code>conda</code> for dependency management.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p><strong>Collaboration in Python Projects and Notebooks using Live Share</strong></p>
+<ul>
+<li><strong>Git</strong>: In a later lesson, we'll cover how to use Git for version control and collaboration in VS Code.</li>
+<li><strong>Real-time Collaboration</strong>: The Live Share extension in VS Code allows you to collaborate with others in real-time, making it easy to work together on projects and notebooks.</li>
+<li><strong>Azure Machine Learning</strong>: Briefly touch upon Azure Machine Learning as a potential tool for cloud-based collaborative notebook experiences, if relevant and applicable.</li>
+<li><strong>Google Colab</strong>: While we likely won't be using Colab in this course, it's an honorable mention as a cloud-based collaborative notebook experience.</li>
+</ul>
+<hr>
+<p><strong>General Q&amp;A and Troubleshooting Session</strong>
+Here are five common questions and their answers related to the topics covered in this lecture:</p>
+<ol>
+<li>
+<p><strong>Q: How do I set up Python virtual environments in VS Code?</strong>
+A: You can set up virtual environments using the command palette (<code>Ctrl+Shift+P</code>) and typing &quot;Python: Select Interpreter&quot;. Then, choose the interpreter from your virtual environment.</p>
+</li>
+<li>
+<p><strong>Q: My Python script runs in the terminal but not VS Code. What could be wrong?</strong>
+A: Check if the correct Python interpreter is selected in VS Code. Also, ensure that all required modules are installed within the environment that VS Code uses.</p>
+</li>
+<li>
+<p><strong>Q: How do I convert a Python script into a Jupyter Notebook in VS Code?</strong>
+A: You can convert Python scripts to notebooks using the <code>#%%</code> comment line to define cells and then using the command &quot;Export Current Python File as Jupyter Notebook&quot;.</p>
+</li>
+<li>
+<p><strong>Q: Why can't I see syntax highlighting or IntelliSense suggestions in my Python file?</strong>
+A: This issue might occur if the Python extension needs to be installed or activated. Ensure that the Python extension is installed and the correct interpreter is selected.</p>
+</li>
+<li>
+<p><strong>Q: How can I share my Jupyter notebook with someone who doesn't have VS Code?</strong>
+A: Jupyter notebooks in <code>.ipynb</code> format can be shared directly as they are widely supported. Alternatively, you can export the notebook to HTML or PDF format for easy sharing.</p>
+</li>
+</ol>
+<hr>
+<p><strong>Conclusion</strong>
+We wrap up our workshop by emphasizing mastering Python scripts and notebooks in VS Code. Becoming an effective Python developer involves continuous practice, and we encourage you to explore and experiment with the tools and techniques discussed today.</p>
+
+            
+            
+        </body>
+        </html>
