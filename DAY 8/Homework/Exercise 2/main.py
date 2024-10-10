@@ -3,4 +3,5 @@ import os
 given_directory = '../Exercise 1'
 
 for file_name in os.listdir(given_directory):
-    print(f'File name: {file_name} {os.stat(given_directory+f'/{file_name}').st_size}bytes')
+    file_size = os.stat(given_directory+f'/{file_name}').st_size
+    print(f'File name: \'{file_name}\' {file_size}bytes')
