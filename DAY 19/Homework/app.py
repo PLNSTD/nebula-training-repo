@@ -62,7 +62,7 @@ def factorial(input_num):
 
 @app.errorhandler(400)
 def bad_request(error_msg):
-    return jsonify({"error": error_msg})
+    return jsonify({"error": error_msg}), 400
 
 if __name__ == '__main__':
     app.run(debug=True)
