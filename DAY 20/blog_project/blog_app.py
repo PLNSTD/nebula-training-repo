@@ -37,11 +37,16 @@ def not_found(msg):
 def get_posts():
     query_title = request.args.get('title', 'default')
     query_content = request.args.get('content', 'default')
-    query_page = int(request.args.get('page', 1))
-    query_page_size = int(request.args.get('size', 2))
-    # 0, 1, 2, 3, 4
-    # page 3 -> idx = 4 ... 6
-    # page 1 -> start_idx = (page - 1) * size & end_idx = start_idx + size
+    page = request.args.get('page', '1')  # Default to '1' if not provided
+    page_size = request.args.get('size', '2')  # Default to '2' if not provided
+
+    # Validate and convert page and size to integers
+    try:
+        query_page = int(page)
+        query_page_size = int(page_size)
+    except ValueError:
+        return bad_request("'page' and 'size' must be valid integers.")
+    
     posts = []
 
     if query_title != 'default':
@@ -58,6 +63,9 @@ def get_posts():
         posts = list(db['posts'].values())
     
     # Pagination
+    # 0, 1, 2, 3, 4
+    # page 3 size 2-> idx = 4 ... 6
+    # page 1 -> start_idx = (page - 1) * size & end_idx = start_idx + size
     start_idx = (query_page - 1) * query_page_size
     end_idx = start_idx + query_page_size
 
@@ -91,7 +99,6 @@ def create_post():
 def get_post_by_id(id):
     if id not in db['posts']:
         return not_found('Post Not Found!')
-
 
     target_post = db['posts'].get(id)
     return success(target_post) 
