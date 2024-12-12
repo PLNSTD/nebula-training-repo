@@ -1,20 +1,20 @@
 {
-  "current_post_id": 3,
-  "posts": {
-    "1": {
-      "title": "This is first post",
-      "content": "content blog",
-      "post_id": 1
-    },
-    "2": {
-      "title": "This is second post",
-      "content": "content blog",
-      "post_id": 2
-    },
-    "3": {
-      "title": "This is third post",
-      "content": "content blog",
-      "post_id": 3
+    "current_post_id": 4,
+    "posts": {
+        "1": {
+            "title": "New title2",
+            "content": "content blog",
+            "post_id": 1
+        },
+        "2": {
+            "title": "This is second post",
+            "content": "content blog",
+            "post_id": 2
+        },
+        "3": {
+            "title": "This is third post",
+            "content": "content blog",
+            "post_id": 3
+        }
     }
-  }
 }

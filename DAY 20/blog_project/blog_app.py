@@ -50,11 +50,13 @@ def get_posts():
     posts = []
 
     if query_title != 'default':
+        print(query_title)
         for key, value in db['posts'].items():
             if query_title in value['title']:
                 posts.append(value)
 
     if query_content != 'default':
+        print(query_content)
         for key, value in db['posts'].items():
             if query_content in value['content']:
                 posts.append(value)
@@ -97,40 +99,40 @@ def create_post():
 # 3. GET Post by ID
 @app.route('/posts/<int:id>')
 def get_post_by_id(id):
-    if id not in db['posts']:
+    if str(id) not in db['posts']:
+        print(db)
         return not_found('Post Not Found!')
 
-    target_post = db['posts'].get(id)
-    return success(target_post) 
+    target_post = db['posts'].get(str(id))
+    return success(target_post)
     
 # 4. PUT Update a Post
 @app.route("/posts/<int:id>", methods=['PUT'])
 def update_post(id):
-    if id not in db['posts']:
+    if str(id) not in db['posts']:
         return not_found("No id found")
     
     updated_post = request.json
 
     if 'title' in updated_post:
-        db['posts'].get(id)['title'] = updated_post['title']
+        db['posts'].get(str(id))['title'] = updated_post['title']
     if 'content' in updated_post:
-        db['posts'].get(id)['content'] = updated_post['content']
+        db['posts'].get(str(id))['content'] = updated_post['content']
     
     save_db()
 
-    return success(db['posts'].get(id))
+    return success(db['posts'].get(str(id)))
 
 # 5. DELETE a Post
 @app.route("/posts/<int:id>", methods=['DELETE'])
 def delete_posts(id):
-    if id not in db['posts']:
+    if str(id) not in db['posts']:
         return not_found("No Id Found")
     
-    db['posts'].pop(id, None)
+    db['posts'].pop(str(id), None)
     save_db()
 
     return success('Post Deleted')
-
 
 # Extra Challenge - Data Persistence
 def save_db():
