@@ -54,6 +54,8 @@ def get_users():
     return jsonify(users)
 
 if __name__ == '__main__':
-    initialize_db()
-    seed()
+    # initialize_db()
+    # seed()
+
+    ### CHECK EXECUTE_QUERY FOR FASTER CONNECTION AND COMMIT
     app.run(debug=True)
