@@ -164,6 +164,9 @@ def get_post_by_id(id):
     cur.close()
     conn.close()
 
+    if not results:
+        return not_found('Post not found!')
+
     post = {
         'id': results[0], 
         'title': results[1],
