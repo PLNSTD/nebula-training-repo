@@ -159,7 +159,7 @@ def get_post_by_id(id):
 
     conn = get_db_connection()
     cur = conn.cursor()
-    cur.execute("SELECT * FROM posts WHERE id = %s;", (str(id)))
+    cur.execute("SELECT * FROM posts WHERE id = %s;", (id,))
     results = cur.fetchone()
     cur.close()
     conn.close()
@@ -183,8 +183,16 @@ def get_post_by_id(id):
 # 4. PUT Update a Post
 @app.route("/posts/<int:id>", methods=['PUT'])
 def update_post(id):
-    if str(id) not in db['posts']:
-        return not_found("No id found")
+
+    conn = get_db_connection()
+    cur = conn.cursor()
+    #### cur.execute(QUERY?) TRY execute_query
+    results = cur.fetchone()
+    cur.close()
+    conn.close()
+
+    if not results:
+        return not_found('Post not found!')
     
     updated_post = request.json
 
