@@ -71,6 +71,15 @@ def bad_request(msg):
 def not_found(msg):
     return jsonify({'error': msg}), 404
     
+
+def execute_query(query):
+    conn = get_db_connection()
+    cur = conn.cursor()
+    # query
+    conn.commit()
+    cur.close()
+    conn.close()
+
 # 1. GET /posts
 @app.route('/posts')
 def get_posts():
@@ -183,38 +192,54 @@ def get_post_by_id(id):
 # 4. PUT Update a Post
 @app.route("/posts/<int:id>", methods=['PUT'])
 def update_post(id):
+    updated_post = request.json
 
     conn = get_db_connection()
     cur = conn.cursor()
-    #### cur.execute(QUERY?) TRY execute_query
-    results = cur.fetchone()
+    if 'title' in updated_post:
+        # db['posts'].get(str(id))['title'] = updated_post['title']
+        cur.execute('UPDATE posts SET title = %s WHERE id = %s', (updated_post['title'], id)) # TRY execute_query LAST LINEEEEEEEEEE
+    if 'content' in updated_post:
+        # db['posts'].get(str(id))['content'] = updated_post['content']
+        cur.execute('UPDATE posts SET content = %s WHERE id = %s', (updated_post['content'], id)) # TRY execute_query LAST LINEEEEEEEEEE
+    # results = cur.fetchall()
+    rows_affected = cur.rowcount
+    conn.commit()
     cur.close()
     conn.close()
 
-    if not results:
-        return not_found('Post not found!')
-    
-    updated_post = request.json
+    # print(results)
 
-    if 'title' in updated_post:
-        db['posts'].get(str(id))['title'] = updated_post['title']
-    if 'content' in updated_post:
-        db['posts'].get(str(id))['content'] = updated_post['content']
+    '''if not results:
+        return not_found('Post not found!')'''
     
-    save_db()
+    # save_db()
 
-    return success(db['posts'].get(str(id)))
+    # return success(db['posts'].get(str(id)))
+    if rows_affected == 0:
+        return bad_request('No rows were updated')
+    else:
+        return success(updated_post)
 
 # 5. DELETE a Post
 @app.route("/posts/<int:id>", methods=['DELETE'])
 def delete_posts(id):
-    if str(id) not in db['posts']:
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute('DELETE FROM posts WHERE id = %s', (id,))
+    conn.commit()
+    cur.close()
+    conn.close()
+
+    return '', 204
+    # DB as JSON
+    '''if str(id) not in db['posts']:
         return not_found("No Id Found")
     
     db['posts'].pop(str(id), None)
     save_db()
 
-    return success('Post Deleted')
+    return success('Post Deleted')'''
 
 # Extra Challenge - Data Persistence
 def save_db():
@@ -224,3 +249,35 @@ def save_db():
 if __name__ == '__main__':
     # initialize_db()
     app.run(debug=True)
+
+
+'''
+# Utility function to simplify query execution
+def execute_query(query, params=None, fetch=None):
+    """
+    Executes an SQL query with optional parameters and fetch behavior.
+    Args:
+        query (str): SQL query to execute.
+        params (tuple or list): Query parameters.
+        fetch (str): Fetch mode - 'one', 'all', or None.
+    Returns:
+        list or dict: Query results if fetch='one' or 'all', otherwise None.
+    """
+    conn = None
+    try:
+        conn = psycopg2.connect(**DATABASE)
+        with conn.cursor(cursor_factory=RealDictCursor) as cur:
+            cur.execute(query, params)
+            if fetch == 'one':
+                return cur.fetchone()
+            elif fetch == 'all':
+                return cur.fetchall()
+            else:
+                conn.commit()
+    except Exception as e:
+        print(f"Error executing query: {e}")
+    finally:
+        if conn:
+            conn.close()
+ 
+'''
