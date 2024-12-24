@@ -72,13 +72,25 @@ def not_found(msg):
     return jsonify({'error': msg}), 404
     
 
-def execute_query(query):
-    conn = get_db_connection()
-    cur = conn.cursor()
-    # query
-    conn.commit()
-    cur.close()
-    conn.close()
+def execute_query(query, params=None, fetch=None):
+    conn = None
+    try:
+        conn = psycopg2.connect(**DATABASE)
+        with conn.cursor() as cur:
+            cur.execute(query, params)
+            if fetch == 'one':
+                return cur.fetchone()
+            elif fetch == 'all':
+                return cur.fetchall()
+            else:
+                conn.commit()
+    except Exception as e:
+        print(f"Error executing query: {e}")
+    finally:
+        if conn:
+            if cur:
+                cur.close()
+            conn.close()
 
 # 1. GET /posts
 @app.route('/posts')
@@ -95,13 +107,15 @@ def get_posts():
     except ValueError:
         return bad_request("'page' and 'size' must be valid integers.")
     
-    conn = get_db_connection()
+    '''conn = get_db_connection()
     cur = conn.cursor()
     cur.execute("SELECT id, title, content FROM posts;")
     results = cur.fetchall()
     cur.close()
-    conn.close()
+    conn.close()'''
 
+    results = execute_query('SELECT id, title, content FROM posts;', fetch='all')
+    print(results)
     posts = []
 
     for row in results:
@@ -151,12 +165,14 @@ def create_post():
     new_post['post_id'] = db['current_post_id']
     db['posts'][new_post['post_id']] = new_post
 
-    conn = get_db_connection()
+    '''conn = get_db_connection()
     cur = conn.cursor()
     cur.execute('INSERT INTO posts (title, content) VALUES (%s, %s);', (new_post['title'], new_post['content']))
     conn.commit()
     cur.close()
-    conn.close()
+    conn.close()'''
+
+    execute_query('INSERT INTO posts (title, content) VALUES (%s, %s);', params=(new_post['title'], new_post['content']))
 
     # save_db()
 

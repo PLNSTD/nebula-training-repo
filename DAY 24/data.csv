@@ -1,0 +1,9 @@
+id,name,email,age,salary,join_date,department
+1,John Doe,john.doe@example.com,28,50000,2020-01-15,Sales
+2,Jane Smith,jane.smith@example.com,34,60000,2019-03-22,Marketing
+3,Emily Jones,emily.jones@example.com,45,75000,2018-07-13,HR
+4,Michael Brown,michael.brown@example.com,23,48000,2021-05-30,Sales
+5,Jessica Davis,jessica.davis@example.com,39,69000,2017-09-18,Marketing
+6,Daniel Wilson,daniel.wilson@example.com,41,72000,2016-11-25,HR
+7,Ashley Martin,ashley.martin@example.com,29,51000,2021-06-19,Sales
+8,Chris Lee,chris.lee@example.com,25,45000,2019-12-11,Marketing
