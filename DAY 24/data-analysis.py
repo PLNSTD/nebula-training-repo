@@ -38,3 +38,9 @@ print(max_avg)
 avg_sales = df.groupby('Region')['Sales'].mean()
 avg_transactions = df.groupby('Region')['Transactions'].mean()
 print(avg_sales, avg_transactions)
+
+# Task 3.2: Which region has the highest average sales, and what might this imply?
+# Solved by Task 2.2
+# That East region has better sales?
+
+# Task 3.3: 
