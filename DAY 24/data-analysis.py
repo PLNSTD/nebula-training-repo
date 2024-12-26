@@ -30,6 +30,11 @@ regions = df.groupby('Region')
 regions_sales_avg = regions['Sales'].mean()
 print(regions_sales_avg)
 
-# Task 2.2: Find and display the region with the highest average scores
+# Task 2.2: Find and display the region with the highest average sales
 max_avg = regions_sales_avg.idxmax()
 print(max_avg)
+
+# Task 3.1: What is the average sales and transactions figure per region?
+avg_sales = df.groupby('Region')['Sales'].mean()
+avg_transactions = df.groupby('Region')['Transactions'].mean()
+print(avg_sales, avg_transactions)
