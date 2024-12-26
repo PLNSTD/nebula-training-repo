@@ -29,5 +29,7 @@ print(pd.DataFrame({'Sales': transactions_details, 'Transactions': sales_details
 regions = df.groupby('Region')
 regions_sales_avg = regions['Sales'].mean()
 print(regions_sales_avg)
+
+# Task 2.2: Find and display the region with the highest average scores
 max_avg = regions_sales_avg.idxmax()
 print(max_avg)
