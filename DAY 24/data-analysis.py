@@ -43,4 +43,9 @@ print(avg_sales, avg_transactions)
 # Solved by Task 2.2
 # That East region has better sales?
 
-# Task 3.3: 
+# Task 3.3: Did you notice any interesting patterns or anomalies in the data?
+# How might you investigate these further?
+'''
+It is interesting that when taking some statistics by columns we lose indexes and references,
+but with idxmax() we're still able to identify them as array items
+'''
