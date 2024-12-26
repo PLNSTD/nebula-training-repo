@@ -16,6 +16,7 @@ df = pd.DataFrame(data)
 
 df.to_csv('data_region.csv')'''
 
+# 1 Calculate the average sales and transactions per region
 df = pd.read_csv('example_data.csv')
 selected_by_position = df.iloc[0:5]
 print(selected_by_position)
