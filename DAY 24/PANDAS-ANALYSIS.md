@@ -150,8 +150,7 @@ Data aggregation is a technique to summarize data, such as finding the mean, sum
 
 ```python
 # Group data by 'department' and calculate the mean for each group
-grouped_data = df.groupby("department")
-avg_salary = grouped_data['salary'].mean()
+grouped_data = df.groupby("department").mean()
 
 # Sum values in 'salary' for each group defined by 'department'
 summarized_data = df.groupby("department")["salary"].sum()
