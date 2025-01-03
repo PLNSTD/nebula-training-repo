@@ -1,18 +1,33 @@
 import requests
 from bs4 import BeautifulSoup
+import pandas as pd
 
-response = requests.get('http://journeytolunar.com')
+response = requests.get('http://books.toscrape.com')
 html_content = response.text
 
 # Parse the HTML
 soup = BeautifulSoup(html_content, 'html.parser')
 
-h1tag = soup.find('h1')
+# Initialize lists to store scraped data
+titles = []
+prices = []
+availabilities = []
+tot_books_under_10 = 0
 
-paragraphs = soup.find_all('p')
+# Find all the book info
+for book in soup.find_all('article', class_='product_pod'):
+    title = book.find('h3').find('a')['title']
+    titles.append(title)
 
-for paragraph in paragraphs:
-    print(paragraph)
+    price = float(book.find('p', class_='price_color').get_text()[2:])
+    prices.append(price)
+    if price < 10: # No books under 10
+        tot_books_under_10 += 1
+    
+    availability = book.find('p', class_='instock availability').get_text().strip()
+    availabilities.append(availability)
 
-content = soup.find('div', class_="intro")
-print(content)
+pd = pd.DataFrame({'Title': titles, 'Price': prices, 'Availability': availabilities})
+
+print(pd.head())
+print('Total book under 10:', tot_books_under_10)
