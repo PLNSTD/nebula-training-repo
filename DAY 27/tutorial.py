@@ -2,7 +2,16 @@ import requests
 from bs4 import BeautifulSoup
 import pandas as pd
 
-response = requests.get('http://books.toscrape.com')
+url = "https://example.com"
+headers = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36"
+}
+response = requests.get(url, headers=headers)
+soup = BeautifulSoup(response.content, "html.parser")
+element = soup.select_one("#bodycontainer > div.mainContentContainer > div.mainContent > div.mainContentFloat > div.leftContainer > div.coverBigBox.clearFloats.bigBox > div.bigBoxBody > div")
+print(element)
+
+'''response = requests.get('http://books.toscrape.com')
 html_content = response.text
 
 # Parse the HTML
@@ -30,4 +39,4 @@ for book in soup.find_all('article', class_='product_pod'):
 pd = pd.DataFrame({'Title': titles, 'Price': prices, 'Availability': availabilities})
 
 print(pd.head())
-print('Total book under 10:', tot_books_under_10)
+print('Total book under 10:', tot_books_under_10)'''
