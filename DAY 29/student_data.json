@@ -1,0 +1,7 @@
+[
+  { "Student": "Alice", "Study": 35, "Sports": 5, "Leisure": 15, "Sleep": 60 },
+  { "Student": "Bob", "Study": 20, "Sports": 10, "Leisure": 30, "Sleep": 60 },
+  { "Student": "Chloe", "Study": 40, "Sports": 3, "Leisure": 10, "Sleep": 57 },
+  { "Student": "David", "Study": 15, "Sports": 20, "Leisure": 40, "Sleep": 50 },
+  { "Student": "Emma", "Study": 30, "Sports": 6, "Leisure": 20, "Sleep": 55 }
+]
