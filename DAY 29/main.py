@@ -1,17 +1,22 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-# Load the data
-df = pd.read_csv("data.csv")
+# Load data from CSV
+data = pd.read_csv('student_scores.csv')
+print(data.head())
 
-# Aggregate the data by department
-salary_by_department = df.groupby("department")["salary"].mean()
+# Preparing the data for plotting
+subjects = ['Math', 'English', 'Science', 'History']
+scores = [data[subject].values for subject in subjects]
 
-# Plot the data
-plt.figure(figsize=(10, 5))
-salary_by_department.plot(kind='bar', color='skyblue')
-plt.title("Average Salary by Department")
-plt.xlabel("Department")
-plt.ylabel("Average Salary")
-plt.xticks(rotation=45)
+plt.figure(figsize=(10, 6))
+plt.boxplot(scores, labels=subjects, patch_artist=True,
+            boxprops=dict(facecolor='cyan', color='blue'),
+            whiskerprops=dict(color='green'),
+            capprops=dict(color='red'),
+            medianprops=dict(color='yellow'))
+plt.title('Colored Box Plot of Student Scores')
+plt.ylabel('Scores')
+plt.xlabel('Subjects')
+plt.grid(True)
 plt.show()
